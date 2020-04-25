@@ -5,19 +5,22 @@ import Loader from '../components/Loader';
 
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
-
   const [restaurant, loading, errorMessage] = useSingleRestaurant(id);
 
   if (!restaurant) {
     return null; //maybe show error message or loading indicator
   }
 
+  const imageURI = restaurant.featured_image
+    ? restaurant.featured_image
+    : 'https://images.unsplash.com/photo-1585747733279-8f64c2b71381?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
+
   return (
     <View>
       <Loader loading={loading} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <Text>{restaurant.name}</Text>
-      <Image style={styles.image} source={{ uri: restaurant.featured_image }} />
+      <Image style={styles.image} source={{ uri: imageURI }} />
       <Text>{restaurant.establishment}</Text>
       <Text>
         User Rating: {restaurant.user_rating.rating_text} (
@@ -37,7 +40,12 @@ const ResultsShowScreen = ({ navigation }) => {
         }}
         renderItem={({ item }) => {
           return (
-            <Image style={styles.image} source={{ uri: item.photo.url }} />
+            <Image
+              style={styles.image}
+              source={{
+                uri: item.photo.url,
+              }}
+            />
           );
         }}
       />
