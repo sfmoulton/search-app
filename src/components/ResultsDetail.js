@@ -4,7 +4,7 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 const ResultsDetail = ({ result }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: result.restaurant.thumb }} />
+      <Image style={styles.image} source={{ uri: result.restaurant.featured_image }} /> 
       <Text style={styles.name}>{result.restaurant.name}</Text>
       <Text>
         Rating: {result.restaurant.user_rating.aggregate_rating}, Votes:{' '}
