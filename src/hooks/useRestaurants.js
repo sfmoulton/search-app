@@ -5,8 +5,10 @@ export default () => {
   const [location, setLocation] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const findLocationId = async (searchTerm) => {
+    setLoading(true);
     try {
       const locationSearch = await zomato.get('/cities', {
         params: {
@@ -21,8 +23,10 @@ export default () => {
 
       //setLocation([locationId, locationName, locationCountry]);
       findBreakfastResturants(locationId);
+      setLoading(false);
     } catch (err) {
       setErrorMessage('Invalid location');
+      setLoading(false);
     }
   };
 
@@ -55,5 +59,5 @@ export default () => {
     findLocationId('Manchester');
   }, []);
 
-  return [findLocationId, restaurants, errorMessage];
+  return [findLocationId, restaurants, errorMessage, loading];
 };

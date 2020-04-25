@@ -3,11 +3,12 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useRestaurants';
 import ResultsList from '../components/ResultsList';
+import Loader from '../components/Loader';
 
 const SearchScreen = () => {
 
   const [term, setTerm] = useState('');
-  const [findLocationId, restaurants, errorMessage] = useRestaurants();
+  const [findLocationId, restaurants, errorMessage, loading] = useRestaurants();
 
   const filterRestaurantsByPrice = (price_range) => {
     return restaurants.filter((result) => {
@@ -22,6 +23,7 @@ const SearchScreen = () => {
         onTermChange={setTerm}
         onTermSubmit={() => findLocationId(term)}
       />
+      <Loader loading={loading}/>
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       <ScrollView>
         <ResultsList
