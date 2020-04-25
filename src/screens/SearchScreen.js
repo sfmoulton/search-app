@@ -1,26 +1,46 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
 const SearchScreen = () => {
   const [term, setTerm] = useState('');
-  const [findLocationId, results, errorMessage] = useResults();
+  const [findLocationId, restaurants, errorMessage] = useResults();
+
+  const filterRestaurantsByPrice = (price_range) => {
+    return restaurants.filter((result) => {
+      return result.restaurant.price_range === price_range;
+    });
+  };
 
   return (
-    <View>
+    <>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => findLocationId(term)}
       />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>We have found {results.length} results</Text>
-      <ResultsList title='Easy'/>
-      <ResultsList title='Medium'/>
-      <ResultsList title='Difficult'/>
-    </View>
+      <ScrollView>
+        <ResultsList
+          restaurants={filterRestaurantsByPrice(1)}
+          title='Cheap as Chips'
+        />
+        <ResultsList
+          restaurants={filterRestaurantsByPrice(2)}
+          title='Reasonable'
+        />
+        <ResultsList
+          restaurants={filterRestaurantsByPrice(3)}
+          title='A Little Pricier'
+        />
+        <ResultsList
+          restaurants={filterRestaurantsByPrice(4)}
+          title='Splash the Cash'
+        />
+      </ScrollView>
+    </>
   );
 };
 

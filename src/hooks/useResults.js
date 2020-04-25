@@ -33,19 +33,19 @@ export default () => {
           entity_id: locationId,
           entity_type: 'city',
           start: 0,
-          count: 2,
+          count: 20,
           category: 8, //breakfast
         },
       });
 
       console.log('NEW REQUEST');
       const resultingRestaurants = response.data.restaurants;
-      console.log(resultingRestaurants);
-      resultingRestaurants.forEach((restaurant) => {
-        console.log(restaurant.restaurant.name);
-      });
+      // console.log(resultingRestaurants);
+      // resultingRestaurants.forEach((restaurant) => {
+      //   console.log(restaurant.restaurant.name);
+      // });
 
-      setRestaurants(response.data);
+      setRestaurants(resultingRestaurants);
     } catch (err) {
       setErrorMessage('Could not find the resturants in city...' + err);
     }
