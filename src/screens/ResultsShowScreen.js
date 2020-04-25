@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, Text, StyleSheet, FlatList, Image, Button, View } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  View,
+} from 'react-native';
 import useSingleRestaurant from '../hooks/useSingleRestaurant';
 import Loader from '../components/Loader';
 import { withOrientation } from 'react-navigation';
 
+import { useFonts } from '@use-expo/font';
+import { AppLoading } from 'expo';
+
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
   const [restaurant, loading, errorMessage] = useSingleRestaurant(id);
+
+  let [fontsLoaded] = useFonts({
+    'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
+  });
 
   if (!restaurant) {
     return null; //maybe show error message or loading indicator
@@ -20,6 +34,18 @@ const ResultsShowScreen = ({ navigation }) => {
     <ScrollView>
       <Loader loading={loading} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
+      {fontsLoaded ? (
+        <Text
+          style={{
+            fontSize: 40,
+            fontFamily: 'Quicksand-Bold',
+          }}
+        >
+          Quicksand-Bold Font
+        </Text>
+      ) : (
+        <AppLoading />
+      )}
       <Text style={styles.name}>{restaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
       <Text style={styles.establishment}>{restaurant.establishment}</Text>
@@ -40,7 +66,7 @@ const ResultsShowScreen = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
           data={restaurant.photos}
           keyExtractor={(item) => {
-            item.photo.url;
+            return item.photo.url;
           }}
           renderItem={({ item }) => {
             return (
@@ -69,7 +95,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 10,
     marginBottom: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   name: {
     color: 'white',
@@ -79,7 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   photoContainer: {
-    backgroundColor: 'red',
+    backgroundColor: '#2f4858',
     paddingTop: 15,
     paddingBottom: 15,
   },
@@ -87,22 +113,22 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 30,
     marginLeft: 12,
-    marginRight: 12
+    marginRight: 12,
   },
   establishment: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     marginLeft: 12,
-    alignSelf: 'center'
-  }, 
+    alignSelf: 'center',
+  },
   title: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 export default ResultsShowScreen;

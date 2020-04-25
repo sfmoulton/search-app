@@ -10,23 +10,31 @@ import { withNavigation } from 'react-navigation';
 import ResultsDetail from './ResultsDetail';
 
 const ResultsList = ({ title, restaurants, navigation }) => {
-  
   if (!restaurants.length) {
     return null;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleStyle}>{title}</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Type', { restaurants })}
+        restaurants={restaurants}
+      >
+        <Text style={styles.titleStyle}>{title}</Text>
+      </TouchableOpacity>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={restaurants}
-        keyExtractor={(result) => result.restaurant.id}
+        keyExtractor={(item, index) => {
+          return item.restaurant.id + index.toString();
+        }}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('ResultsShow', {id: item.restaurant.id})}
+              onPress={() =>
+                navigation.navigate('ResultsShow', { id: item.restaurant.id })
+              }
             >
               <ResultsDetail result={item} />
             </TouchableOpacity>

@@ -41,8 +41,6 @@ export default () => {
           category: 8, //breakfast
         },
       });
-
-      console.log('NEW REQUEST');
       const resultingRestaurants = response.data.restaurants;
       // console.log(resultingRestaurants);
       // resultingRestaurants.forEach((restaurant) => {

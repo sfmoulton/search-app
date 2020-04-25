@@ -3,39 +3,27 @@ import { createAppContainer } from 'react-navigation';
 import SearchScreen from './src/screens/SearchScreen';
 import ResultsShowScreen from './src/screens/ResultsShowScreen';
 import HomeScreen from './src/screens/HomeScreen';
-
-// import * as Font from 'expo-font';
-// import { AppLoading } from 'expo';
-// import {useState} from 'react';
-
-// const fetchFonts = () => {
-//   return Font.loadAsync({
-//     'Quicksand-Bold': require('./assets/fonts/Quicksand-Bold.ttf'),
-//     'Quicksand-Light': require('./assets/fonts/Quicksand-Light.ttf'),
-//     'Quicksand-Medium': require('./assets/fonts/Quicksand-Medium.ttf'),
-//     'Quicksand-Regular': require('./assets/fonts/Quicksand-Regular.ttf'),
-//     'Quicksand-SemiBold': require('./assets/fonts/Quicksand-SemiBold.ttf'),
-//   });
-// };
+import ResultsTypeScreen from './src/screens/ResultsTypeScreen';
 
 const navigator = createStackNavigator(
   {
     Search: SearchScreen,
     ResultsShow: ResultsShowScreen,
     Home: HomeScreen,
+    Type: ResultsTypeScreen,
   },
   {
-    initialRouteName: 'Search',
+    initialRouteName: 'Home',
     defaultNavigationOptions: {
-      title: 'Find My Breakfast!',
+      title: 'Brunch Finder',
       cardStyle: {
-        backgroundColor: '#2F4858',
-      },
-      headerStyle: {
         backgroundColor: '#33658A',
       },
+      headerStyle: {
+        backgroundColor: '#F6AE2D',
+      },
       headerTintColor: '#fff',
-      headerTitleAlign: 'center'
+      headerTitleAlign: 'center',
     },
   }
 );

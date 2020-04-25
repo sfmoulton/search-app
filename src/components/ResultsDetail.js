@@ -26,8 +26,8 @@ const ResultsDetail = ({ result }) => {
 const styles = StyleSheet.create({
   container: {
     marginLeft: 12,
-    flexDirection: 'column', 
-    borderColor: 'white'
+    flexDirection: 'column',
+    borderColor: 'white',
   },
   image: {
     width: 150,
@@ -38,11 +38,10 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: 'bold',
     color: 'white',
-    
   },
   info: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 });
 
 export default ResultsDetail;
