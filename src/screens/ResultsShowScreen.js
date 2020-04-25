@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, Button } from 'react-native';
+import { ScrollView, Text, StyleSheet, FlatList, Image, Button, View } from 'react-native';
 import useSingleRestaurant from '../hooks/useSingleRestaurant';
 import Loader from '../components/Loader';
+import { withOrientation } from 'react-navigation';
 
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
@@ -16,41 +17,46 @@ const ResultsShowScreen = ({ navigation }) => {
     : 'https://images.unsplash.com/photo-1585747733279-8f64c2b71381?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
 
   return (
-    <View>
+    <ScrollView>
       <Loader loading={loading} />
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-      <Text>{restaurant.name}</Text>
+      <Text style={styles.name}>{restaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
-      <Text>{restaurant.establishment}</Text>
-      <Text>
+      <Text style={styles.establishment}>{restaurant.establishment}</Text>
+      <Text style={styles.info}>
         User Rating: {restaurant.user_rating.rating_text} (
         {restaurant.user_rating.aggregate_rating})
       </Text>
-      <Text>Average Cost for Two: £{restaurant.average_cost_for_two}</Text>
-      <Text>Address: {restaurant.location.address}</Text>
-      <Text>Timings: {restaurant.timings}</Text>
+      <Text style={styles.info}>
+        Average Cost for Two: £{restaurant.average_cost_for_two}
+      </Text>
+      <Text style={styles.info}>Address: {restaurant.location.address}</Text>
+      <Text style={styles.info}>Timings: {restaurant.timings}</Text>
 
-      <Text>Customer Photos</Text>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={restaurant.photos}
-        keyExtractor={(item) => {
-          item.photo.url;
-        }}
-        renderItem={({ item }) => {
-          return (
-            <Image
-              style={styles.image}
-              source={{
-                uri: item.photo.url,
-              }}
-            />
-          );
-        }}
-      />
+      <Text style={styles.title}>Customer Photos</Text>
+      <View style={styles.photoContainer}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={restaurant.photos}
+          keyExtractor={(item) => {
+            item.photo.url;
+          }}
+          renderItem={({ item }) => {
+            return (
+              <Image
+                style={styles.image}
+                source={{
+                  uri: item.photo.url,
+                }}
+              />
+            );
+          }}
+        />
+      </View>
+
       {/* <Button title='Menu'>{restaurant.menu_url}</Button> */}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -61,7 +67,42 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginLeft: 5,
     marginRight: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center'
   },
+  name: {
+    color: 'white',
+    fontSize: 25,
+    marginTop: 10,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  photoContainer: {
+    backgroundColor: 'red',
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+  info: {
+    color: 'white',
+    lineHeight: 30,
+    marginLeft: 12,
+    marginRight: 12
+  },
+  establishment: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 12,
+    alignSelf: 'center'
+  }, 
+  title: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginBottom: 10
+  }
 });
 
 export default ResultsShowScreen;

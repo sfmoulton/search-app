@@ -14,9 +14,8 @@ const ResultsDetail = ({ result }) => {
           uri: imageURI.length ? imageURI : defaultFeatureImg,
         }}
       />
-
       <Text style={styles.name}>{result.restaurant.name}</Text>
-      <Text>
+      <Text style={styles.info}>
         Rating: {result.restaurant.user_rating.aggregate_rating}, Votes:{' '}
         {result.restaurant.user_rating.votes}
       </Text>
@@ -27,6 +26,8 @@ const ResultsDetail = ({ result }) => {
 const styles = StyleSheet.create({
   container: {
     marginLeft: 12,
+    flexDirection: 'column', 
+    borderColor: 'white'
   },
   image: {
     width: 150,
@@ -36,7 +37,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
+    color: 'white',
+    
   },
+  info: {
+    color: 'white'
+  }
 });
 
 export default ResultsDetail;
