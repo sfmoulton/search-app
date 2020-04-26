@@ -6,7 +6,7 @@ export default () => {
   const [restaurantsErrorMsg, setRestaurantsErrorMsg] = useState('');
   const [restaurantsLoading, setRestaurantsLoading] = useState(true);
 
-  const findRestaurants = async (cityID, start, count) => {
+  const findRestaurants = async (cityID, start, count, categoryId) => {
     setRestaurantsLoading(true);
     try {
       const response = await zomato.get('/search', {
@@ -17,6 +17,7 @@ export default () => {
           count: count,
           sort: 'rating',
           order: 'desc',
+          category: (categoryId) ? categoryId : null
         },
       });
 

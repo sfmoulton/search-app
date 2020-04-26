@@ -48,18 +48,21 @@ const SearchScreen = ({ navigation }) => {
       />
       <Loader loading={restaurantsLoading} />
       {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
-
       <Text>Search by type: </Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={categories}
+        keyExtractor={(item) => {
+          return item.categories.id;
+        }}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('Type', {
                 categoryId: item.categories.id,
-                location: term,
+                categoryName: item.categories.name,
+                cityID: cityID,
               })
             }
           >
@@ -69,6 +72,8 @@ const SearchScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
+      {/* const {height} = Dimensions.get('window'); */}
+      {/* <View style={{flex:1, height:height}}></View> */}
       <ScrollView>
         <ResultsList restaurants={restaurants} title='Top Rated' />
       </ScrollView>
