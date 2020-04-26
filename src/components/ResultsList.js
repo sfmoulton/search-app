@@ -33,12 +33,15 @@ const ResultsList = ({ title, cityID, navigation }) => {
       <Loader loading={restaurantsLoading} />
       {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
       <TouchableOpacity
-        onPress={() => navigation.navigate('Type', { restaurants })}
+        onPress={() => navigation.navigate('Category', { restaurants })}
         restaurants={restaurants}
       >
-        <Text style={styles.titleStyle}>{title}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleStyle}>{title}</Text>
+        </View>
       </TouchableOpacity>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={restaurants}
         keyExtractor={(item, index) => {
           return item.restaurant.id + index.toString();
@@ -47,7 +50,7 @@ const ResultsList = ({ title, cityID, navigation }) => {
           return (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate('ResultsShow', { id: item.restaurant.id })
+                navigation.navigate('Restaurant', { id: item.restaurant.id })
               }
             >
               <ResultsDetail result={item} />
@@ -61,15 +64,20 @@ const ResultsList = ({ title, cityID, navigation }) => {
 
 const styles = StyleSheet.create({
   titleStyle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 12,
-    marginBottom: 5,
+    fontSize: 20,
+    alignSelf: 'center',
+    marginBottom: 10,
     color: 'white',
+    fontFamily: 'PlayfairDisplay-SemiBold',
   },
   container: {
     marginBottom: 8,
     marginTop: 8,
+  },
+  titleContainer: {
+    backgroundColor: '#ad343e',
+    width: 200,
+    alignSelf: 'center',
   },
 });
 

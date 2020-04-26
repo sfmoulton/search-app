@@ -8,21 +8,22 @@ import ResultsTypeScreen from './src/screens/ResultsTypeScreen';
 const navigator = createStackNavigator(
   {
     Search: SearchScreen,
-    ResultsShow: ResultsShowScreen,
+    Restaurant: ResultsShowScreen,
     Home: HomeScreen,
-    Type: ResultsTypeScreen,
+    Category: ResultsTypeScreen,
   },
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: {
-      title: 'Brunch Finder',
       cardStyle: {
-        backgroundColor: '#33658A',
+        backgroundColor: '#606c38',
       },
       headerStyle: {
-        backgroundColor: '#F6AE2D',
+        backgroundColor: '#404B1A',
+        height: 65,
+        elevation: 10
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#ffffff',
       headerTitleAlign: 'center',
     },
   }

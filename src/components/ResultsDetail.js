@@ -25,9 +25,14 @@ const ResultsDetail = ({ result }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 12,
     flexDirection: 'column',
     borderColor: 'white',
+    marginBottom: 5,
+    marginTop: 5,
+    backgroundColor: '#404b1a',
+    alignItems: 'center',
+    width: 250,
+    padding: 10,
   },
   image: {
     width: 150,
@@ -36,11 +41,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   name: {
-    fontWeight: 'bold',
     color: 'white',
+    fontFamily: 'PlayfairDisplay-Regular',
+    fontSize: 17,
+    textAlign: 'center',
+    marginTop: 2,
+    marginBottom: 2,
   },
   info: {
     color: 'white',
+    fontFamily: 'Assistant-Light',
+    fontSize: 15,
+    marginTop: 2,
+    marginBottom: 2,
   },
 });
 

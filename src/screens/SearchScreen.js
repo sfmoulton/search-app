@@ -3,10 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   FlatList,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import ResultsList from '../components/ResultsList';
@@ -31,44 +29,47 @@ const SearchScreen = ({ navigation }) => {
     getCategories();
     findCityID('London');
   }, []);
-  const { height } = Dimensions.get('window');
 
   return (
     <>
       <Loader loading={cityIDLoading} />
-      <Text>My location: {cityName}</Text>
+      <View style={styles.locationContainer}>
+        <Text style={styles.titleStyle}>My location: </Text>
+        <Text style={styles.locationStyle}>{cityName}</Text>
+      </View>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => findCityID(term)}
       />
       {cityErrorMsg ? <Text>{cityErrorMsg}</Text> : null}
-      <Text>Search by type: </Text>
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={categories}
-        keyExtractor={(item, index) => {
-          return item.categories.id.toString() + index.toString();
-        }}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('Type', {
-                categoryId: item.categories.id,
-                categoryName: item.categories.name,
-                cityID: cityID,
-              })
-            }
-          >
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>{item.categories.name}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
-
-      <View style={{ height: height - 240 }}>
+      <Text style={styles.titleStyle}>Search by type: </Text>
+      <View style={styles.typeContainer}>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={categories}
+          keyExtractor={(item, index) => {
+            return item.categories.id.toString() + index.toString();
+          }}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Category', {
+                  categoryId: item.categories.id,
+                  categoryName: item.categories.name,
+                  cityID: cityID,
+                })
+              }
+            >
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>{item.categories.name}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      <View style={styles.resultsContainer}>
         <ResultsList cityID={cityID} title='Top Rated' />
       </View>
     </>
@@ -77,16 +78,49 @@ const SearchScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   button: {
-    borderColor: 'white',
-    borderWidth: 2,
-    padding: 2,
+    borderRadius: 5,
+    padding: 10,
     margin: 2,
-    backgroundColor: 'white',
-    height: 55,
+    backgroundColor: '#ad343e',
+    height: 50,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignContent: 'center',
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: 17,
     alignSelf: 'center',
+    fontFamily: 'PlayfairDisplay-SemiBold',
+    color: 'white',
+    alignSelf: 'center',
+  },
+  titleStyle: {
+    fontFamily: 'PlayfairDisplay-Bold',
+    color: 'white',
+    fontSize: 20,
+    marginLeft: 12,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  typeContainer: {
+    height: 70,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  locationStyle: {
+    fontFamily: 'PlayfairDisplay-Regular',
+    color: 'white',
+    fontSize: 20,
+    marginLeft: 12,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  locationContainer: {
+    flexDirection: 'row',
+  },
+  resultsContainer: {
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });
 

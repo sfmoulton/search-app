@@ -8,6 +8,7 @@ export default () => {
 
   const findRestaurants = async (cityID, start, count, categoryId) => {
     setRestaurantsLoading(true);
+
     try {
       const response = await zomato.get('/search', {
         params: {

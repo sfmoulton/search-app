@@ -10,7 +10,7 @@ import {
 import useSingleRestaurant from '../hooks/useSingleRestaurant';
 import Loader from '../components/Loader';
 
-import { useFonts } from '@use-expo/font';
+// import { useFonts } from '@use-expo/font';
 
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
@@ -25,9 +25,9 @@ const ResultsShowScreen = ({ navigation }) => {
     getRestaurant(id);
   }, []);
 
-  let [fontsLoaded] = useFonts({
-    'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
-  });
+  // let [fontsLoaded] = useFonts({
+  //   'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
+  // });
 
   if (!singleRestaurant) {
     return null; //maybe show error message or loading indicator
@@ -43,11 +43,12 @@ const ResultsShowScreen = ({ navigation }) => {
       {singleRestaurantErrorMsg ? (
         <Text>{singleRestaurantErrorMsg}</Text>
       ) : null}
-      <Text style={styles.name}>{singleRestaurant.name}</Text>
+      <Text style={styles.restaurantName}>{singleRestaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
       <Text style={styles.establishment}>{singleRestaurant.establishment}</Text>
-      <Text style={styles.info}>
-        User Rating: {singleRestaurant.user_rating.rating_text} (
+      <Text style={styles.infoBold}>
+       User Rating:</Text>
+       <Text style={styles.info}>{singleRestaurant.user_rating.rating_text} (
         {singleRestaurant.user_rating.aggregate_rating})
       </Text>
       <Text style={styles.info}>
@@ -57,7 +58,6 @@ const ResultsShowScreen = ({ navigation }) => {
         Address: {singleRestaurant.location.address}
       </Text>
       <Text style={styles.info}>Timings: {singleRestaurant.timings}</Text>
-
       <Text style={styles.title}>Customer Photos</Text>
       <View style={styles.photoContainer}>
         <FlatList
@@ -79,7 +79,6 @@ const ResultsShowScreen = ({ navigation }) => {
           }}
         />
       </View>
-
       {/* <Button title='Menu'>{restaurant.menu_url}</Button> */}
     </ScrollView>
   );
@@ -96,16 +95,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center',
   },
-  name: {
+  restaurantName: {
     color: 'white',
-    fontSize: 25,
+    fontSize: 22,
     marginTop: 10,
-    fontWeight: 'bold',
     alignSelf: 'center',
-    fontFamily: 'Quicksand-Bold',
+    fontFamily: 'PlayfairDisplay-SemiBold',
   },
   photoContainer: {
-    backgroundColor: '#2f4858',
+    backgroundColor: '#404b1a',
     paddingTop: 15,
     paddingBottom: 15,
   },
@@ -114,20 +112,30 @@ const styles = StyleSheet.create({
     lineHeight: 30,
     marginLeft: 12,
     marginRight: 12,
+    fontFamily: 'Assistant-Light',
+    alignSelf: 'center',
+  },
+  infoBold: {
+    color: 'white',
+    lineHeight: 30,
+    marginLeft: 12,
+    marginRight: 12,
+    fontFamily: 'Assistant-Bold',
+    alignSelf: 'center',
   },
   establishment: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
     marginLeft: 12,
     alignSelf: 'center',
+    fontFamily: 'Assistant-Bold',
   },
   title: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
     alignSelf: 'center',
     marginBottom: 10,
+    fontFamily: 'PlayfairDisplay-SemiBold',
   },
 });
 

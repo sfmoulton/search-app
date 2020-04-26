@@ -37,12 +37,17 @@ const ResultsTypeScreen = ({ navigation }) => {
   }
 
   return (
-    <View>
-      <Text>{categoryName}</Text>
+    <View style={styles.restaurantContainer}>
       {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
-      <ResultsList restaurants={restaurants} title='Restaurants' />
+      <ResultsList restaurants={restaurants} title={categoryName} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  restaurantContainer: {
+    alignItems: 'center'
+  }
+});
 
 export default ResultsTypeScreen;
