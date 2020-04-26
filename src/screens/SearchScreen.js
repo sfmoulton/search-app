@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import ResultsList from '../components/ResultsList';
@@ -37,7 +38,7 @@ const SearchScreen = ({ navigation }) => {
     findCityID('London');
     findRestaurants(cityID, 0, 20);
   }, []);
-
+  //const { height } = Dimensions.get('window');
   return (
     <>
       <Text>My location: {cityName}</Text>
@@ -46,7 +47,7 @@ const SearchScreen = ({ navigation }) => {
         onTermChange={setTerm}
         onTermSubmit={() => findCityID(term)}
       />
-      <Loader loading={restaurantsLoading} />
+      <Loader loading={categoriesLoading} />
       {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
       <Text>Search by type: </Text>
       <FlatList
@@ -72,7 +73,7 @@ const SearchScreen = ({ navigation }) => {
           </TouchableOpacity>
         )}
       />
-      {/* const {height} = Dimensions.get('window'); */}
+
       {/* <View style={{flex:1, height:height}}></View> */}
       <ScrollView>
         <ResultsList restaurants={restaurants} title='Top Rated' />

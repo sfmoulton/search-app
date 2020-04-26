@@ -17,7 +17,7 @@ export default () => {
           count: count,
           sort: 'rating',
           order: 'desc',
-          category: (categoryId) ? categoryId : null
+          category: categoryId ? categoryId : null,
         },
       });
 
