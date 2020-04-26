@@ -9,9 +9,10 @@ import {
   View,
 } from 'react-native';
 
-const ResultsTypeScreen = ({restaurants}) => {
+const ResultsTypeScreen = ({ navigation }) => {
 
-  console.log(restaurants);
+  const categoryId = navigation.getParam('categoryId');
+  const location = navigation.getParam('location');
   
 
   return (

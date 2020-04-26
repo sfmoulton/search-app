@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 15,
     width: 300,
-    alignSelf: 'center'
+    alignSelf: 'center' ,
+    elevation: 5
+    
   },
 });
 

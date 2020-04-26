@@ -23,8 +23,6 @@ const ResultsList = ({ title, restaurants, navigation }) => {
         <Text style={styles.titleStyle}>{title}</Text>
       </TouchableOpacity>
       <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
         data={restaurants}
         keyExtractor={(item, index) => {
           return item.restaurant.id + index.toString();

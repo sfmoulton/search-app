@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   ScrollView,
   Text,
@@ -9,62 +9,61 @@ import {
 } from 'react-native';
 import useSingleRestaurant from '../hooks/useSingleRestaurant';
 import Loader from '../components/Loader';
-import { withOrientation } from 'react-navigation';
 
 import { useFonts } from '@use-expo/font';
-import { AppLoading } from 'expo';
 
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
-  const [restaurant, loading, errorMessage] = useSingleRestaurant(id);
+  const [
+    getRestaurant,
+    singleRestaurant,
+    singleRestaurantLoading,
+    singleRestaurantErrorMsg,
+  ] = useSingleRestaurant();
+
+  useEffect(() => {
+    getRestaurant(id);
+  }, []);
 
   let [fontsLoaded] = useFonts({
     'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
   });
 
-  if (!restaurant) {
+  if (!singleRestaurant) {
     return null; //maybe show error message or loading indicator
   }
 
-  const imageURI = restaurant.featured_image
-    ? restaurant.featured_image
+  const imageURI = singleRestaurant.featured_image
+    ? singleRestaurant.featured_image
     : 'https://images.unsplash.com/photo-1585747733279-8f64c2b71381?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
 
   return (
     <ScrollView>
-      <Loader loading={loading} />
-      {errorMessage ? <Text>{errorMessage}</Text> : null}
-      {fontsLoaded ? (
-        <Text
-          style={{
-            fontSize: 40,
-            fontFamily: 'Quicksand-Bold',
-          }}
-        >
-          Quicksand-Bold Font
-        </Text>
-      ) : (
-        <AppLoading />
-      )}
-      <Text style={styles.name}>{restaurant.name}</Text>
+      <Loader loading={singleRestaurantLoading} />
+      {singleRestaurantErrorMsg ? (
+        <Text>{singleRestaurantErrorMsg}</Text>
+      ) : null}
+      <Text style={styles.name}>{singleRestaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
-      <Text style={styles.establishment}>{restaurant.establishment}</Text>
+      <Text style={styles.establishment}>{singleRestaurant.establishment}</Text>
       <Text style={styles.info}>
-        User Rating: {restaurant.user_rating.rating_text} (
-        {restaurant.user_rating.aggregate_rating})
+        User Rating: {singleRestaurant.user_rating.rating_text} (
+        {singleRestaurant.user_rating.aggregate_rating})
       </Text>
       <Text style={styles.info}>
-        Average Cost for Two: £{restaurant.average_cost_for_two}
+        Average Cost for Two: £{singleRestaurant.average_cost_for_two}
       </Text>
-      <Text style={styles.info}>Address: {restaurant.location.address}</Text>
-      <Text style={styles.info}>Timings: {restaurant.timings}</Text>
+      <Text style={styles.info}>
+        Address: {singleRestaurant.location.address}
+      </Text>
+      <Text style={styles.info}>Timings: {singleRestaurant.timings}</Text>
 
       <Text style={styles.title}>Customer Photos</Text>
       <View style={styles.photoContainer}>
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
-          data={restaurant.photos}
+          data={singleRestaurant.photos}
           keyExtractor={(item) => {
             return item.photo.url;
           }}
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: 'bold',
     alignSelf: 'center',
+    fontFamily: 'Quicksand-Bold',
   },
   photoContainer: {
     backgroundColor: '#2f4858',
