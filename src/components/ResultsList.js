@@ -27,7 +27,6 @@ const ResultsList = ({ title, cityID, navigation }) => {
     setCurrentCityID(cityID);
     findRestaurants(currentCityID, start, count);
   }, []);
-
   return (
     <View style={styles.container}>
       <Loader loading={restaurantsLoading} />

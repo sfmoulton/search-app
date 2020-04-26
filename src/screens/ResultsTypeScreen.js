@@ -46,8 +46,8 @@ const ResultsTypeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   restaurantContainer: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default ResultsTypeScreen;

@@ -25,10 +25,6 @@ const ResultsShowScreen = ({ navigation }) => {
     getRestaurant(id);
   }, []);
 
-  // let [fontsLoaded] = useFonts({
-  //   'Quicksand-Bold': require('../../assets/fonts/Quicksand-Bold.ttf'),
-  // });
-
   if (!singleRestaurant) {
     return null; //maybe show error message or loading indicator
   }
@@ -46,9 +42,9 @@ const ResultsShowScreen = ({ navigation }) => {
       <Text style={styles.restaurantName}>{singleRestaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
       <Text style={styles.establishment}>{singleRestaurant.establishment}</Text>
-      <Text style={styles.infoBold}>
-       User Rating:</Text>
-       <Text style={styles.info}>{singleRestaurant.user_rating.rating_text} (
+      <Text style={styles.infoBold}>User Rating:</Text>
+      <Text style={styles.info}>
+        {singleRestaurant.user_rating.rating_text} (
         {singleRestaurant.user_rating.aggregate_rating})
       </Text>
       <Text style={styles.info}>

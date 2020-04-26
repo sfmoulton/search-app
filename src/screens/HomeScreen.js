@@ -37,7 +37,7 @@ const HomeScreen = ({ navigation }) => {
               style={{
                 color: 'white',
                 fontSize: 20,
-                fontFamily: 'PlayfairDisplay-SemiBold'
+                fontFamily: 'PlayfairDisplay-SemiBold',
               }}
             >
               Get started

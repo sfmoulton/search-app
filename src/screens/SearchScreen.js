@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import ResultsList from '../components/ResultsList';
-import Loader from '../components/Loader';
 import { withNavigation } from 'react-navigation';
 
 import useCity from '../hooks/useCity';
@@ -32,7 +31,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <>
-      <Loader loading={cityIDLoading} />
       <View style={styles.locationContainer}>
         <Text style={styles.titleStyle}>My location: </Text>
         <Text style={styles.locationStyle}>{cityName}</Text>

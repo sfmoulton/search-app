@@ -4,15 +4,19 @@ import { StyleSheet, View, Modal, ActivityIndicator } from 'react-native';
 const Loader = (props) => {
   const { loading } = props;
 
-  return (
-    <Modal transparent={true} animationType={'none'} visible={loading}>
-      <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator animating={loading} />
+  if (!loading) {
+    return null;
+  } else {
+    return (
+      <Modal transparent={true} animationType={'none'} visible={loading}>
+        <View style={styles.modalBackground}>
+          <View style={styles.activityIndicatorWrapper}>
+            <ActivityIndicator animating={loading} />
+          </View>
         </View>
-      </View>
-    </Modal>
-  );
+      </Modal>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
