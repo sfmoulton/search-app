@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,30 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ResultsDetail from './ResultsDetail';
+import useRestaurants from '../hooks/useRestaurants';
+import Loader from '../components/Loader';
 
-const ResultsList = ({ title, restaurants, navigation }) => {
-  if (!restaurants.length) {
-    return null;
-  }
+const ResultsList = ({ title, cityID, navigation }) => {
+  const [start, setStart] = useState(0);
+  const [count, setCount] = useState(20);
+  const [currentCityID, setCurrentCityID] = useState('');
+
+  const [
+    findRestaurants,
+    restaurants,
+    restaurantsErrorMsg,
+    restaurantsLoading,
+  ] = useRestaurants();
+
+  useEffect(() => {
+    setCurrentCityID(cityID);
+    findRestaurants(currentCityID, start, count);
+  }, []);
 
   return (
     <View style={styles.container}>
+      <Loader loading={restaurantsLoading} />
+      {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
       <TouchableOpacity
         onPress={() => navigation.navigate('Type', { restaurants })}
         restaurants={restaurants}

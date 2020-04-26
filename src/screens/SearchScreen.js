@@ -15,16 +15,10 @@ import { withNavigation } from 'react-navigation';
 
 import useCity from '../hooks/useCity';
 import useCategories from '../hooks/useCategories';
-import useRestaurants from '../hooks/useRestaurants';
 
 const SearchScreen = ({ navigation }) => {
   const [term, setTerm] = useState('');
-  const [
-    findRestaurants,
-    restaurants,
-    restaurantsErrorMsg,
-    restaurantsLoading,
-  ] = useRestaurants();
+
   const [findCityID, cityID, cityErrorMsg, cityIDLoading, cityName] = useCity();
   const [
     getCategories,
@@ -36,26 +30,26 @@ const SearchScreen = ({ navigation }) => {
   useEffect(() => {
     getCategories();
     findCityID('London');
-    findRestaurants(cityID, 0, 20);
   }, []);
-  //const { height } = Dimensions.get('window');
+  const { height } = Dimensions.get('window');
+
   return (
     <>
+      <Loader loading={cityIDLoading} />
       <Text>My location: {cityName}</Text>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => findCityID(term)}
       />
-      <Loader loading={categoriesLoading} />
-      {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
+      {cityErrorMsg ? <Text>{cityErrorMsg}</Text> : null}
       <Text>Search by type: </Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
         data={categories}
-        keyExtractor={(item) => {
-          return item.categories.id;
+        keyExtractor={(item, index) => {
+          return item.categories.id.toString() + index.toString();
         }}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -74,10 +68,9 @@ const SearchScreen = ({ navigation }) => {
         )}
       />
 
-      {/* <View style={{flex:1, height:height}}></View> */}
-      <ScrollView>
-        <ResultsList restaurants={restaurants} title='Top Rated' />
-      </ScrollView>
+      <View style={{ height: height - 240 }}>
+        <ResultsList cityID={cityID} title='Top Rated' />
+      </View>
     </>
   );
 };
