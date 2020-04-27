@@ -37,10 +37,10 @@ I also used the 'Expo' app on my own Android device during development, to emula
 
 The Zomato API is used to make the restaurant information requests based on location. An initial request has to be made following a users search for the corresponding _city_id_, after which the relevant requests for the restaurant data could be made.
 
-## Project Dependencies
-
-The following dependencies were required to build the Find-Dining app:
-
 ## Images
 
 ![Find-Dining-Home](https://user-images.githubusercontent.com/57372099/80339191-03c49000-8856-11ea-9232-69c30f60fed5.png)
+
+![Find-DIning-Search-Screen](https://user-images.githubusercontent.com/57372099/80366601-70a14f80-8881-11ea-9bd8-71b4a8d55f41.png)
+
+![Find-Dining-Restaurant-Info](https://user-images.githubusercontent.com/57372099/80366651-831b8900-8881-11ea-8417-989f0a1265d9.png)
