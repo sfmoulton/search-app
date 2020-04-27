@@ -10,8 +10,6 @@ import {
 import useSingleRestaurant from '../hooks/useSingleRestaurant';
 import Loader from '../components/Loader';
 
-// import { useFonts } from '@use-expo/font';
-
 const ResultsShowScreen = ({ navigation }) => {
   const id = navigation.getParam('id');
   const [

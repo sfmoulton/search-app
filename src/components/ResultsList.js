@@ -11,10 +11,10 @@ import ResultsDetail from './ResultsDetail';
 import useRestaurants from '../hooks/useRestaurants';
 import Loader from '../components/Loader';
 
-const ResultsList = ({ title, cityID, navigation }) => {
+const ResultsList = ({ title, cityID, navigation, categoryId }) => {
   const [start, setStart] = useState(0);
   const [count, setCount] = useState(20);
-  const [currentCityID, setCurrentCityID] = useState('');
+  const [currentCityID, setCurrentCityID] = useState('61'); //London
 
   const [
     findRestaurants,
@@ -24,9 +24,9 @@ const ResultsList = ({ title, cityID, navigation }) => {
   ] = useRestaurants();
 
   useEffect(() => {
-    setCurrentCityID(cityID);
-    findRestaurants(currentCityID, start, count);
-  }, []);
+    findRestaurants(cityID, start, count, categoryId);
+  }, [cityID, start, count, categoryId]);
+
   return (
     <View style={styles.container}>
       <Loader loading={restaurantsLoading} />

@@ -3,7 +3,7 @@ import zomato from '../api/zomato';
 
 export default () => {
   const [cityName, setCityName] = useState('');
-  const [cityID, setCityID] = useState('');
+  const [cityID, setCityID] = useState('61'); //london
   const [cityErrorMsg, setCityErrorMsg] = useState('');
   const [cityIDLoading, setCityIDLoading] = useState(true);
 
