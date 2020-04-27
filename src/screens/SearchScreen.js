@@ -31,16 +31,21 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <>
-      <View style={styles.locationContainer}>
-        <Text style={styles.titleStyle}>My location: </Text>
-        <Text style={styles.locationStyle}>{cityName}</Text>
-      </View>
+      <Text style={styles.titleStyle}>Search new city:</Text>
       <SearchBar
         term={term}
         onTermChange={setTerm}
         onTermSubmit={() => findCityID(term)}
       />
-      {cityErrorMsg ? <Text>{cityErrorMsg}</Text> : null}
+      {cityErrorMsg ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.error}>{cityErrorMsg}</Text>
+        </View>
+      ) : null}
+      <View style={styles.locationContainer}>
+        <Text style={styles.titleStyle}>My location: </Text>
+        <Text style={styles.locationStyle}>{cityName}</Text>
+      </View>
       <Text style={styles.titleStyle}>Search by type: </Text>
       <View style={styles.typeContainer}>
         <FlatList
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   locationStyle: {
-    fontFamily: 'PlayfairDisplay-Regular',
+    fontFamily: 'Assistant-Light',
     color: 'white',
     fontSize: 20,
     marginLeft: 12,
@@ -119,6 +124,21 @@ const styles = StyleSheet.create({
   resultsContainer: {
     alignItems: 'center',
     marginBottom: 10,
+  },
+  error: {
+    fontFamily: 'Assistant-Bold',
+    color: 'white',
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  errorContainer: {
+    backgroundColor: '#ad343e',
+    marginLeft: 12,
+    marginRight: 12,
+    marginTop: 10,
+    marginBottom: 10
   },
 });
 

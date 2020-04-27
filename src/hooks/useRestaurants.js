@@ -25,7 +25,7 @@ export default () => {
       setRestaurants(response.data.restaurants);
       setRestaurantsLoading(false);
     } catch (err) {
-      setRestaurantsErrorMsg('Error: Could not find the resturants in city');
+      setRestaurantsErrorMsg('Error: Could not find the restaurants in city');
       setRestaurantsLoading(false);
     }
   };

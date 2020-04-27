@@ -40,19 +40,28 @@ const ResultsShowScreen = ({ navigation }) => {
       <Text style={styles.restaurantName}>{singleRestaurant.name}</Text>
       <Image style={styles.image} source={{ uri: imageURI }} />
       <Text style={styles.establishment}>{singleRestaurant.establishment}</Text>
-      <Text style={styles.infoBold}>User Rating:</Text>
-      <Text style={styles.info}>
-        {singleRestaurant.user_rating.rating_text} (
-        {singleRestaurant.user_rating.aggregate_rating})
-      </Text>
-      <Text style={styles.info}>
-        Average Cost for Two: £{singleRestaurant.average_cost_for_two}
-      </Text>
-      <Text style={styles.info}>
-        Address: {singleRestaurant.location.address}
-      </Text>
-      <Text style={styles.info}>Timings: {singleRestaurant.timings}</Text>
-      <Text style={styles.title}>Customer Photos</Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoBold}>User Rating: </Text>
+        <Text style={styles.info}>
+          {singleRestaurant.user_rating.rating_text} (
+          {singleRestaurant.user_rating.aggregate_rating})
+        </Text>
+      </View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoBold}>Average Cost for Two: </Text>
+        <Text style={styles.info}>
+          £{singleRestaurant.average_cost_for_two}
+        </Text>
+      </View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoBold}>Address: </Text>
+        <Text style={styles.info}> {singleRestaurant.location.address}</Text>
+      </View>
+      <View style={styles.infoContainer}>
+        <Text style={styles.infoBold}>Opening Times:</Text>
+      </View>
+      <Text style={styles.timings}> {singleRestaurant.timings}</Text>
+      <Text style={styles.photoTitle}>Customer Photos</Text>
       <View style={styles.photoContainer}>
         <FlatList
           horizontal
@@ -73,7 +82,6 @@ const ResultsShowScreen = ({ navigation }) => {
           }}
         />
       </View>
-      {/* <Button title='Menu'>{restaurant.menu_url}</Button> */}
     </ScrollView>
   );
 };
@@ -104,32 +112,51 @@ const styles = StyleSheet.create({
   info: {
     color: 'white',
     lineHeight: 30,
-    marginLeft: 12,
-    marginRight: 12,
     fontFamily: 'Assistant-Light',
     alignSelf: 'center',
+    fontSize: 15,
   },
   infoBold: {
     color: 'white',
     lineHeight: 30,
-    marginLeft: 12,
-    marginRight: 12,
     fontFamily: 'Assistant-Bold',
     alignSelf: 'center',
+    fontSize: 15,
   },
   establishment: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 17,
     marginLeft: 12,
     alignSelf: 'center',
     fontFamily: 'Assistant-Bold',
+    marginBottom: 10,
+    marginTop: 10,
   },
-  title: {
+  photoTitle: {
     color: 'white',
     fontSize: 18,
     alignSelf: 'center',
     marginBottom: 10,
-    fontFamily: 'PlayfairDisplay-SemiBold',
+    marginTop: 10,
+    fontFamily: 'Assistant-Bold',
+  },
+  infoContainer: {
+    flexDirection: 'row',
+    width: 250,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  timings: {
+    marginLeft: 12,
+    marginRight: 12,
+    color: 'white',
+    lineHeight: 30,
+    marginLeft: 20,
+    marginRight: 20,
+    fontFamily: 'Assistant-Light',
+    alignSelf: 'center',
   },
 });
 
