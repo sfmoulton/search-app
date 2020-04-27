@@ -35,6 +35,13 @@ To make your own API requests, you will need to create your own '.env' file in t
 ```js
 ZOMATO_API_KEY=*Your key here*
 ```
+### Testing
+
+Jest has also been used for unit testing in the application. These tests can be run using the below command:
+
+```js
+npm test
+```
 
 ### Images
 
