@@ -10,7 +10,7 @@ Should you have any questions or would like any further information, please get 
 
 ## Creating the app
 
-As a React-Native beginner, I chose to install **Expo** to start the project. Expo is a toolchain built around React Native which helps to quickly start a universal native app for Android, iOS and the web with JavaScript and React. After following tutorials and reading numerous articles, Expo offered a great developer experience for developers with no prior experience.
+As a React-Native beginner, I chose to install **Expo** to start the project. Expo is a toolchain built around React Native which helps to quickly start a universal native app for Android, iOS and the web with JavaScript and React. After following tutorials and reading numerous articles, it appeared that Expo offered a great developer experience for developers with no prior experience, which was ideal for the project.
 
 I also used the 'Expo' app on my own Android device during development, to emulate the application.
 
@@ -38,7 +38,7 @@ ZOMATO_API_KEY=*Your key here*
 
 ### Images
 
-Below are example images of the application - with the Home screen, Search screen and the individual restaurant information.
+Below are example images of the application - with the Home Screen, Search Screen and the Individual Restaurant Information.
 
 ![Find-Dining-Home](https://user-images.githubusercontent.com/57372099/80339191-03c49000-8856-11ea-9232-69c30f60fed5.png)
 
