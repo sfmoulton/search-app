@@ -14,7 +14,7 @@ import Loader from '../components/Loader';
 const ResultsList = ({ title, cityID, navigation, categoryId }) => {
   const [start, setStart] = useState(0);
   const [count, setCount] = useState(20);
-  const [currentCityID, setCurrentCityID] = useState('61'); //London
+  const [currentCityID, setCurrentCityID] = useState(cityID);
 
   const [
     findRestaurants,
@@ -30,15 +30,14 @@ const ResultsList = ({ title, cityID, navigation, categoryId }) => {
   return (
     <View style={styles.container}>
       <Loader loading={restaurantsLoading} />
-      {restaurantsErrorMsg ? <Text>{restaurantsErrorMsg}</Text> : null}
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Category', { restaurants })}
-        restaurants={restaurants}
-      >
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleStyle}>{title}</Text>
+      {restaurantsErrorMsg ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.error}>{restaurantsErrorMsg}</Text>
         </View>
-      </TouchableOpacity>
+      ) : null}
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleStyle}>{title}</Text>
+      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={restaurants}
@@ -75,7 +74,21 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     backgroundColor: '#ad343e',
-    width: 200,
+    alignSelf: 'center',
+    padding: 2,
+  },
+  error: {
+    fontFamily: 'Assistant-Bold',
+    color: 'white',
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  errorContainer: {
+    backgroundColor: '#ad343e',
+    marginTop: 10,
+    marginBottom: 10,
     alignSelf: 'center',
   },
 });
