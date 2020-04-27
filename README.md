@@ -40,3 +40,7 @@ The Zomato API is used to make the restaurant information requests based on loca
 ## Project Dependencies
 
 The following dependencies were required to build the Find-Dining app:
+
+## Images
+
+![Find-Dining-Home](https://user-images.githubusercontent.com/57372099/80339191-03c49000-8856-11ea-9232-69c30f60fed5.png)
